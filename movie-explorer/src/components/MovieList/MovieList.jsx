@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash'
+
 import './MovieList.css';
 import Fire from '../../assets/fire.png';
 import MovieCard from './MovieCard';
 import FilterGroup from './FilterGroup';
 
+
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [minRating, setMinRating] = useState(0);
+  const [sort, setsort] = useState({by:"default", order: "asc"})
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
@@ -41,6 +45,11 @@ const MovieList = () => {
       setFilteredMovies(filtered);
     }
   };
+
+  const handleSort=e =>{
+    const {name, value} = e.target;
+    setsort (prev=>({...prev, [name]:value}))
+  }
 
   const loadMoreRef = React.useRef(null);
 
@@ -79,16 +88,16 @@ const MovieList = () => {
         <div className="align_center movie_list_fs">
           <FilterGroup minRating={minRating} onRatingClick={handleFilter} ratings = {[8,7,6]} />
 
-          <select name="" id="" className="align_center movie_sorting">
-            <option value="">Sort by</option>
-            <option value=""> Date</option>
-            <option value="">Rating</option>
+          <select name="by" id="" onChange={handleSort} value={sort.by} className="align_center movie_sorting">
+            <option value="default">Sort by</option>
+            <option value="release_date"> Date</option>
+            <option value="vote_average">Rating</option>
             <option value="">Genre</option>
           </select>
 
-          <select name="" id="" className="align_center movie_sorting">
-            <option value="">Ascending</option>
-            <option value=""> Descending</option>
+          <select name="order" id="" onChange={handleSort} value={sort.order} className="align_center movie_sorting">
+            <option value="asc">Ascending</option>
+            <option value="desc"> Descending</option>
           </select>
         </div>
       </header>
