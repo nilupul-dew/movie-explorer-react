@@ -4,6 +4,7 @@
     justify-content: space-between;
     padding: 0 30px;
     border-bottom: 1px solid #e6e6e6;
+    flex-wrap: wrap;
 }
 
 .navbar > h1 {
@@ -14,6 +15,7 @@
 .navbar_links {
     display: flex;
     align-items: center;
+    gap: 20px;
 }
 
 .navbar_links > a {
@@ -31,3 +33,11 @@
     height: 25px;
     margin-left: 7px;
 }
+
+.navbar_search {
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-left: 20px;
+  }
